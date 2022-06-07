@@ -18,7 +18,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import loginSchema from '../../utils/schemas/login'
+import loginSchema from './../../../utils/schemas/login'
 
 const Login = () => {
   const {
