@@ -11,7 +11,13 @@ const NavBar = () => {
   })
   return (
     <>
-      <Flex as="nav" bg={'primary'} overflow={'auto'} padding={'0 10px 0 10px'}>
+      <Flex
+        as="nav"
+        bg={'primary'}
+        overflow={'auto'}
+        padding={'0 10px 0 10px'}
+        minW={'fit-content'}
+      >
         <HStack spacing={0} w={'full'}>
           <BoxWrapper>
             <HeaderLink style={linkStyle} to={'/'}>

@@ -10,7 +10,7 @@ const theme = extendTheme({
     lilight: '#9090FF',
     secondary: '#304256',
     terciary: '#345d6b',
-    alert: '#A20623',
+    error: '#A20623',
     positive: '#419D78',
   },
 })
