@@ -1,24 +1,33 @@
 import {
-  Center,
-  Flex,
-  FormControl,
   FormHelperText,
   FormErrorMessage,
   FormLabel,
-  Input,
-  Heading,
-  Button,
   InputGroup,
   InputRightElement,
-  IconButton,
 } from '@chakra-ui/react'
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import loginSchema from '../../utils/schemas/login'
+import loginSchema from '../../../utils/schemas/login'
+import {
+  ButtonSubmit,
+  FormContainer,
+  FormTitle,
+  FormWrapper,
+  IconRightPassword,
+  InputStyled,
+  InputWrapper,
+  LinkSignup,
+  LinkWrapper,
+  TextOr,
+} from './style'
+
+export interface DataType {
+  email?: string
+  password?: string
+}
 
 const Login = () => {
   const {
@@ -27,35 +36,29 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) })
 
+  const submitData = (data: DataType) => {
+    console.log(data)
+  }
+
   const [viewPassword, setViewPassword] = useState(false)
 
   const handleShowPassword = () => setViewPassword(!viewPassword)
+
   return (
     <>
-      <Center height={'full'}>
-        <Flex
-          gap={'10'}
-          as="form"
-          direction={'column'}
-          bg={'#f7dece'}
-          borderRadius={'3xl'}
-          padding={'12'}
-          minW={'320px'}
-        >
-          <Heading as="h2" size="xl" color={'primary'} textAlign={'center'}>
-            Admin Login
-          </Heading>
-          <FormControl color={'secondary'} isInvalid={errors.email}>
+      <FormWrapper>
+        <FormContainer as="form" onSubmit={handleSubmit(submitData)}>
+          <FormTitle as="h2">Admin Login</FormTitle>
+          <InputWrapper isInvalid={errors.email}>
             <FormLabel htmlFor="email">Email</FormLabel>
-            <Input
-              borderColor={'primary'}
-              color={'primary'}
-              variant="flushed"
+            <InputStyled
               id="email"
               type="email"
+              variant="flushed"
+              {...register('email')}
             />
             {!errors.email ? (
-              <FormHelperText color={'positive'} fontWeight={'bold'}>
+              <FormHelperText color={'positive'} fontWeight={'semibold'}>
                 Digite seu E-mail.
               </FormHelperText>
             ) : (
@@ -63,21 +66,18 @@ const Login = () => {
                 {errors.email.message}
               </FormErrorMessage>
             )}
-          </FormControl>
-          <FormControl color={'secondary'} isInvalid={errors.password}>
+          </InputWrapper>
+          <InputWrapper color={'secondary'} isInvalid={errors.password}>
             <FormLabel htmlFor="email">Senha</FormLabel>
-            <InputGroup size="md">
-              <Input
-                pr="4.5rem"
+            <InputGroup>
+              <InputStyled
+                id="password"
                 type={viewPassword ? 'text' : 'password'}
                 variant="flushed"
-                borderColor={'primary'}
+                {...register('password')}
               />
-              <InputRightElement width="4.5rem">
-                <IconButton
-                  aria-label="password visibility"
-                  h="1.75rem"
-                  size="sm"
+              <InputRightElement width="3rem">
+                <IconRightPassword
                   onClick={handleShowPassword}
                   variant={'ghost'}
                   icon={viewPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -85,7 +85,7 @@ const Login = () => {
               </InputRightElement>
             </InputGroup>
             {!errors.password ? (
-              <FormHelperText color={'positive'} fontWeight={'bold'}>
+              <FormHelperText color={'positive'} fontWeight={'semibold'}>
                 Letras, números e símbolos
               </FormHelperText>
             ) : (
@@ -93,10 +93,14 @@ const Login = () => {
                 {errors.password.message}
               </FormErrorMessage>
             )}
-          </FormControl>
-          <Button type="submit">Logar-se</Button>
-        </Flex>
-      </Center>
+          </InputWrapper>
+          <ButtonSubmit type="submit">Logar-se</ButtonSubmit>
+          <TextOr>Ou</TextOr>
+          <LinkWrapper>
+            <LinkSignup to={'/admin/register'}>Cadastre-se</LinkSignup>
+          </LinkWrapper>
+        </FormContainer>
+      </FormWrapper>
     </>
   )
 }
