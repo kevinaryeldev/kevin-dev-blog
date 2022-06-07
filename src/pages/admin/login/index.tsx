@@ -29,13 +29,14 @@ export interface DataType {
   password?: string
 }
 
+
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) })
-
+  
   const submitData = (data: DataType) => {
     console.log(data)
   }
@@ -78,6 +79,7 @@ const Login = () => {
               />
               <InputRightElement width="3rem">
                 <IconRightPassword
+
                   onClick={handleShowPassword}
                   variant={'ghost'}
                   icon={viewPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -101,6 +103,7 @@ const Login = () => {
           </LinkWrapper>
         </FormContainer>
       </FormWrapper>
+
     </>
   )
 }
