@@ -1,8 +1,8 @@
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
-  FormLabel,
-  FormHelperText,
   FormErrorMessage,
+  FormHelperText,
+  FormLabel,
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react'
@@ -12,30 +12,24 @@ import { useForm } from 'react-hook-form'
 import registerSchema from '../../../utils/schemas/register'
 import { DataType } from '../login'
 import {
-  FormWrapper,
+  ButtonSubmit,
   FormContainer,
   FormTitle,
-  InputWrapper,
-  InputStyled,
+  FormWrapper,
   IconRightPassword,
-  ButtonSubmit,
-  TextOr,
-  LinkWrapper,
+  InputStyled,
+  InputWrapper,
   LinkSignup,
+  LinkWrapper,
+  TextOr,
 } from '../login/style'
 
-interface DataRegisterType extends DataType {
+interface DataTypeRegister extends DataType {
   name?: string
-  paswordConfirm?: string
+  passwordConfirm?: string
 }
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(registerSchema) })
-
   const [viewPassword, setViewPassword] = useState(false)
   const [viewPasswordConfirm, setViewPasswordConfirm] = useState(false)
   const handleShowPassword = (isPassword: boolean) => {
@@ -43,27 +37,34 @@ const Register = () => {
       ? setViewPassword(!viewPassword)
       : setViewPasswordConfirm(!viewPasswordConfirm)
   }
-  const submitData = (data: DataRegisterType) => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(registerSchema) })
+
+  const submitRegister = (data: DataTypeRegister) => {
     console.log(data)
   }
+
   return (
     <>
-      <FormWrapper>
-        <FormContainer as="form" onSubmit={handleSubmit(submitData)}>
-          <FormTitle as="h2">Admin Register</FormTitle>
+      <FormWrapper paddingY={10}>
+        <FormContainer as="form" onSubmit={handleSubmit(submitRegister)}>
+          <FormTitle as="h2">Registro de Admin</FormTitle>
           <InputWrapper isInvalid={errors.name}>
-            <FormLabel htmlFor="nome">Nome</FormLabel>
+            <FormLabel htmlFor="name">Nome</FormLabel>
             <InputStyled
-              id="nome"
+              id="name"
               type="text"
               variant="flushed"
               {...register('name')}
             />
             {!errors.name ? (
-              <FormHelperText
-                color={'positive'}
-                fontWeight={'semibold'}
-              ></FormHelperText>
+              <FormHelperText color={'positive'} fontWeight={'semibold'}>
+                {' '}
+              </FormHelperText>
             ) : (
               <FormErrorMessage color={'error'}>
                 {errors.name.message}
@@ -80,7 +81,7 @@ const Register = () => {
             />
             {!errors.email ? (
               <FormHelperText color={'positive'} fontWeight={'semibold'}>
-                Digite seu E-mail.
+                {''}
               </FormHelperText>
             ) : (
               <FormErrorMessage color={'error'}>
@@ -88,8 +89,8 @@ const Register = () => {
               </FormErrorMessage>
             )}
           </InputWrapper>
-          <InputWrapper color={'secondary'} isInvalid={errors.password}>
-            <FormLabel htmlFor="email">Senha</FormLabel>
+          <InputWrapper isInvalid={errors.password}>
+            <FormLabel htmlFor="password">Senha</FormLabel>
             <InputGroup>
               <InputStyled
                 id="password"
@@ -99,7 +100,7 @@ const Register = () => {
               />
               <InputRightElement width="3rem">
                 <IconRightPassword
-                  onClick={handleShowPassword(true)}
+                  onClick={() => handleShowPassword(true)}
                   variant={'ghost'}
                   icon={viewPassword ? <ViewIcon /> : <ViewOffIcon />}
                 />
@@ -107,7 +108,7 @@ const Register = () => {
             </InputGroup>
             {!errors.password ? (
               <FormHelperText color={'positive'} fontWeight={'semibold'}>
-                Letras, números e símbolos
+                {' '}
               </FormHelperText>
             ) : (
               <FormErrorMessage color={'error'}>
@@ -115,18 +116,18 @@ const Register = () => {
               </FormErrorMessage>
             )}
           </InputWrapper>
-          <InputWrapper color={'secondary'} isInvalid={errors.passwordConfirm}>
-            <FormLabel htmlFor="email">Senha</FormLabel>
+          <InputWrapper isInvalid={errors.passwordConfirm}>
+            <FormLabel htmlFor="passwordConfirm">Confirmar Senha</FormLabel>
             <InputGroup>
               <InputStyled
-                id="password"
+                id="passwordConfirm"
                 type={viewPasswordConfirm ? 'text' : 'password'}
                 variant="flushed"
                 {...register('passwordConfirm')}
               />
               <InputRightElement width="3rem">
                 <IconRightPassword
-                  onClick={handleShowPassword(false)}
+                  onClick={() => handleShowPassword(false)}
                   variant={'ghost'}
                   icon={viewPasswordConfirm ? <ViewIcon /> : <ViewOffIcon />}
                 />
@@ -134,7 +135,7 @@ const Register = () => {
             </InputGroup>
             {!errors.passwordConfirm ? (
               <FormHelperText color={'positive'} fontWeight={'semibold'}>
-                Letras, números e símbolos
+                {' '}
               </FormHelperText>
             ) : (
               <FormErrorMessage color={'error'}>
@@ -143,6 +144,10 @@ const Register = () => {
             )}
           </InputWrapper>
           <ButtonSubmit type="submit">Registrar-se</ButtonSubmit>
+          <TextOr>Ou</TextOr>
+          <LinkWrapper>
+            <LinkSignup to={'/admin/login'}>Voltar ao Login</LinkSignup>
+          </LinkWrapper>
         </FormContainer>
       </FormWrapper>
     </>
