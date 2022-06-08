@@ -15,8 +15,9 @@ const registerSchema = yup.object().shape({
       'A senha deve ter, no mínimo, um caractere especial'
     )
     .min(8, 'A senha deve ter, no mínimo, 8 caracteres'),
-  passwordConfirmation: yup
+  passwordConfirm: yup
     .string()
+    .required('Campo obrigatório')
     .oneOf([yup.ref('password')], 'Senhas Incompatíveis'),
   name: yup
     .string()

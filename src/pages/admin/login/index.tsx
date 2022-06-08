@@ -29,15 +29,14 @@ export interface DataType {
   password?: string
 }
 
-
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) })
-  
-  const submitData = (data: DataType) => {
+
+  const submitLogin = (data: DataType) => {
     console.log(data)
   }
 
@@ -48,7 +47,7 @@ const Login = () => {
   return (
     <>
       <FormWrapper>
-        <FormContainer as="form" onSubmit={handleSubmit(submitData)}>
+        <FormContainer as="form" onSubmit={handleSubmit(submitLogin)}>
           <FormTitle as="h2">Admin Login</FormTitle>
           <InputWrapper isInvalid={errors.email}>
             <FormLabel htmlFor="email">Email</FormLabel>
@@ -68,7 +67,7 @@ const Login = () => {
               </FormErrorMessage>
             )}
           </InputWrapper>
-          <InputWrapper color={'secondary'} isInvalid={errors.password}>
+          <InputWrapper isInvalid={errors.password}>
             <FormLabel htmlFor="email">Senha</FormLabel>
             <InputGroup>
               <InputStyled
@@ -79,7 +78,6 @@ const Login = () => {
               />
               <InputRightElement width="3rem">
                 <IconRightPassword
-
                   onClick={handleShowPassword}
                   variant={'ghost'}
                   icon={viewPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -103,7 +101,6 @@ const Login = () => {
           </LinkWrapper>
         </FormContainer>
       </FormWrapper>
-
     </>
   )
 }
