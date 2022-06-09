@@ -1,10 +1,9 @@
 import PageRouter from './PageRouter'
 import './App.css'
-import { Box } from '@chakra-ui/react'
-
+import { Box, useColorModeValue } from '@chakra-ui/react'
 function App() {
   return (
-    <Box bg={'primary'} className="App">
+    <Box bg={useColorModeValue('white', 'black')} className="App">
       <PageRouter />
     </Box>
   )

@@ -1,46 +1,48 @@
-import { Flex, HStack, Switch } from '@chakra-ui/react'
-import { BoxWrapper, HeaderLink } from './style'
-
+import { Box, Flex, HStack, useColorModeValue } from '@chakra-ui/react'
+import ButtonDarkMode from '../../../ButtonDarkMode'
+import { HeaderLink } from './style'
 const NavBar = () => {
   type linkStyleProps = {
     isActive: boolean
   }
   const linkStyle = ({ isActive }: linkStyleProps) => ({
-    color: isActive ? '#9090FF' : 'inherit',
-    background: isActive ? 'inherit' : '#9090FF',
+    background: isActive ? useColorModeValue('#f0ebe4', '#1a1d1a') : '',
+    borderBottom: isActive ? '3px solid #258ea6' : '',
   })
+
   return (
     <>
       <Flex
         as="nav"
-        bg={'primary'}
+        bg={'#ff9626'}
         overflow={'auto'}
         padding={'0 10px 0 10px'}
-        minW={'fit-content'}
+        w={'full'}
+        justify={'space-between'}
       >
-        <HStack spacing={0} w={'full'}>
-          <BoxWrapper>
+        <HStack spacing={0}>
+          <Box>
             <HeaderLink style={linkStyle} to={'/'}>
               Home
             </HeaderLink>
-          </BoxWrapper>
-          <BoxWrapper>
+          </Box>
+          <Box>
             <HeaderLink style={linkStyle} to={'/posts'}>
               Posts
             </HeaderLink>
-          </BoxWrapper>
-          <BoxWrapper>
+          </Box>
+          <Box>
             <HeaderLink style={linkStyle} to={'/about'}>
               Sobre
             </HeaderLink>
-          </BoxWrapper>
-          <BoxWrapper>
+          </Box>
+          <Box>
             <HeaderLink style={linkStyle} to={'/contato'}>
               Contato
             </HeaderLink>
-          </BoxWrapper>
+          </Box>
         </HStack>
-        <Switch disabled alignSelf={'center'} />
+        <ButtonDarkMode />
       </Flex>
     </>
   )

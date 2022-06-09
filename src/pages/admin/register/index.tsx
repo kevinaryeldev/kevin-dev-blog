@@ -1,5 +1,7 @@
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
+  Box,
+  FormControl,
   FormErrorMessage,
   FormHelperText,
   FormLabel,
@@ -9,20 +11,23 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import AdminHeader from '../../../components/AdminHeader'
+import ButtonDarkMode from '../../../components/ButtonDarkMode'
+import { PageWrapper } from '../../../style/styledComponents'
 import registerSchema from '../../../utils/schemas/register'
 import { DataType } from '../login'
 import {
-  ButtonSubmit,
   FormContainer,
-  FormTitle,
   FormWrapper,
   IconRightPassword,
-  InputStyled,
-  InputWrapper,
   LinkSignup,
-  LinkWrapper,
   TextOr,
 } from '../login/style'
+import {
+  ButtonAdminStyle,
+  LinkWrapperStyle,
+  InputStyled,
+} from '../login/style2'
 
 interface DataTypeRegister extends DataType {
   name?: string
@@ -49,11 +54,13 @@ const Register = () => {
   }
 
   return (
-    <>
-      <FormWrapper paddingY={10}>
+    <PageWrapper>
+      <AdminHeader pageTitle="Registro de Admin">
+        <ButtonDarkMode />
+      </AdminHeader>
+      <FormWrapper>
         <FormContainer as="form" onSubmit={handleSubmit(submitRegister)}>
-          <FormTitle as="h2">Registro de Admin</FormTitle>
-          <InputWrapper isInvalid={errors.name}>
+          <FormControl isInvalid={errors.name}>
             <FormLabel htmlFor="name">Nome</FormLabel>
             <InputStyled
               id="name"
@@ -70,8 +77,8 @@ const Register = () => {
                 {errors.name.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <InputWrapper isInvalid={errors.email}>
+          </FormControl>
+          <FormControl isInvalid={errors.email}>
             <FormLabel htmlFor="email">Email</FormLabel>
             <InputStyled
               id="email"
@@ -88,8 +95,8 @@ const Register = () => {
                 {errors.email.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <InputWrapper isInvalid={errors.password}>
+          </FormControl>
+          <FormControl isInvalid={errors.password}>
             <FormLabel htmlFor="password">Senha</FormLabel>
             <InputGroup>
               <InputStyled
@@ -115,8 +122,8 @@ const Register = () => {
                 {errors.password.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <InputWrapper isInvalid={errors.passwordConfirm}>
+          </FormControl>
+          <FormControl isInvalid={errors.passwordConfirm}>
             <FormLabel htmlFor="passwordConfirm">Confirmar Senha</FormLabel>
             <InputGroup>
               <InputStyled
@@ -142,15 +149,17 @@ const Register = () => {
                 {errors.passwordConfirm.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <ButtonSubmit type="submit">Registrar-se</ButtonSubmit>
-          <TextOr>Ou</TextOr>
-          <LinkWrapper>
-            <LinkSignup to={'/admin/login'}>Voltar ao Login</LinkSignup>
-          </LinkWrapper>
+          </FormControl>
+          <Box display="flex" flexDir="column" gap="2">
+            <ButtonAdminStyle type="submit">Registrar-se</ButtonAdminStyle>
+            <TextOr>Ou</TextOr>
+            <LinkWrapperStyle>
+              <LinkSignup to={'/admin/login'}>Voltar ao Login</LinkSignup>
+            </LinkWrapperStyle>
+          </Box>
         </FormContainer>
       </FormWrapper>
-    </>
+    </PageWrapper>
   )
 }
 export default Register

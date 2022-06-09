@@ -4,6 +4,8 @@ import {
   FormLabel,
   InputGroup,
   InputRightElement,
+  FormControl,
+  Box,
 } from '@chakra-ui/react'
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
@@ -12,17 +14,16 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import loginSchema from '../../../utils/schemas/login'
 import {
-  ButtonSubmit,
   FormContainer,
-  FormTitle,
   FormWrapper,
   IconRightPassword,
-  InputStyled,
-  InputWrapper,
   LinkSignup,
-  LinkWrapper,
   TextOr,
 } from './style'
+import { ButtonAdminStyle, LinkWrapperStyle, InputStyled } from './style2'
+import { PageWrapper } from '../../../style/styledComponents'
+import AdminHeader from '../../../components/AdminHeader'
+import ButtonDarkMode from '../../../components/ButtonDarkMode'
 
 export interface DataType {
   email?: string
@@ -45,11 +46,13 @@ const Login = () => {
   const handleShowPassword = () => setViewPassword(!viewPassword)
 
   return (
-    <>
+    <PageWrapper>
+      <AdminHeader pageTitle="Admin Login">
+        <ButtonDarkMode />
+      </AdminHeader>
       <FormWrapper>
         <FormContainer as="form" onSubmit={handleSubmit(submitLogin)}>
-          <FormTitle as="h2">Admin Login</FormTitle>
-          <InputWrapper isInvalid={errors.email}>
+          <FormControl isInvalid={errors.email}>
             <FormLabel htmlFor="email">Email</FormLabel>
             <InputStyled
               id="email"
@@ -66,8 +69,8 @@ const Login = () => {
                 {errors.email.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <InputWrapper isInvalid={errors.password}>
+          </FormControl>
+          <FormControl isInvalid={errors.password}>
             <FormLabel htmlFor="email">Senha</FormLabel>
             <InputGroup>
               <InputStyled
@@ -93,15 +96,17 @@ const Login = () => {
                 {errors.password.message}
               </FormErrorMessage>
             )}
-          </InputWrapper>
-          <ButtonSubmit type="submit">Logar-se</ButtonSubmit>
-          <TextOr>Ou</TextOr>
-          <LinkWrapper>
-            <LinkSignup to={'/admin/register'}>Cadastre-se</LinkSignup>
-          </LinkWrapper>
+          </FormControl>
+          <Box display="flex" flexDir="column" gap="2">
+            <ButtonAdminStyle type="submit">Logar-se</ButtonAdminStyle>
+            <TextOr>Ou</TextOr>
+            <LinkWrapperStyle>
+              <LinkSignup to={'/admin/register'}>Cadastre-se</LinkSignup>
+            </LinkWrapperStyle>
+          </Box>
         </FormContainer>
       </FormWrapper>
-    </>
+    </PageWrapper>
   )
 }
 export default Login
