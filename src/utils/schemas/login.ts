@@ -1,9 +1,9 @@
 import * as yup from 'yup'
 const loginSchema = yup.object().shape({
-  email: yup.string().required('Digite seu email').email('Email inválido'),
+  email: yup.string().required('Campo Obrigatório').email('Email inválido'),
   password: yup
     .string()
-    .required('Digite sua senha')
+    .required('Campo Obrigatório')
     .min(8, 'Senha muito curta'),
 })
 export default loginSchema
