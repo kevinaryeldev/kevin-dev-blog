@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Textarea,
-} from '@chakra-ui/react'
+import { Box, Flex, FormControl, FormLabel } from '@chakra-ui/react'
+import { InputFormPostStyle, TextAreaFormPostStyle } from './style'
 
 interface PostMainProps {
   children: React.ReactNode
@@ -15,26 +7,25 @@ interface PostMainProps {
 
 const PostMain = ({ children }: PostMainProps) => {
   return (
-    <Box bg="#f0ebe4" padding="5" borderRadius="lg">
-      <Flex justify="space-between">
-        <Heading>Principal</Heading>
+    <Box padding="5" borderRadius="lg">
+      <Flex justify={['flex-start', 'space-around', 'flex-end']} gap={'5'}>
         {children}
       </Flex>
       <FormControl>
-        <FormLabel color="#f0ebe4">Título do Post</FormLabel>
-        <Input w={['2xs', 'xs', 'sm', 'md']} fontSize="xl" bg="white" />
+        <FormLabel>Título do Post</FormLabel>
+        <InputFormPostStyle name="post-title" />
       </FormControl>
       <FormControl>
-        <FormLabel color="#f0ebe4">SubTítulo do Post</FormLabel>
-        <Input w={['2xs', 'xs', 'sm', 'md']} fontSize="xl" bg="white" />
+        <FormLabel>Subtítulo do Post</FormLabel>
+        <InputFormPostStyle name="post-subtitle" />
       </FormControl>
       <FormControl>
-        <FormLabel color="#f0ebe4">Conteúdo Principal</FormLabel>
-        <Textarea h={['2xs', 'xs', 'xs']} resize="none"></Textarea>
+        <FormLabel>Conteúdo Principal</FormLabel>
+        <TextAreaFormPostStyle name="post-mainContent" />
       </FormControl>
       <FormControl>
-        <FormLabel color="#f0ebe4">Imagem do Post</FormLabel>
-        <Input></Input>
+        <FormLabel>Imagem do Post</FormLabel>
+        <InputFormPostStyle name="post-Image" />
       </FormControl>
     </Box>
   )

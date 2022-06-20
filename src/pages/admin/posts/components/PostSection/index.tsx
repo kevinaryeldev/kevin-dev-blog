@@ -1,34 +1,41 @@
-import { Box, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { FormControl, FormLabel } from '@chakra-ui/react'
+import { InputFormPostStyle, TextAreaFormPostStyle } from '../PostMain/style'
+import { DecorationPost, PostSectionContainer } from './style'
 
 interface PostSectionProps {
   key: string
   id: string
+  num: number
 }
 
-const PostSection = ({ id }: PostSectionProps) => {
+const PostSection = ({ id, num }: PostSectionProps) => {
   return (
-    <Box w={'100%'} border="2px solid primary" padding="4" bg="primary">
-      <FormControl>
-        <FormLabel color="#f0ebe4">Título da seção</FormLabel>
-        <Input w={['2xs', 'xs', 'sm', 'md']} fontSize="xl" bg="white" />
-      </FormControl>
-      <FormControl>
-        <FormLabel color="#f0ebe4">SubTítulo da seção</FormLabel>
-        <Input></Input>
-      </FormControl>
-      <FormControl>
-        <FormLabel color="#f0ebe4">Imagem do Topo</FormLabel>
-        <Input></Input>
-      </FormControl>
-      <FormControl>
-        <FormLabel color="#f0ebe4">Conteúdo</FormLabel>
-        <Textarea h={['2xs', 'xs', 'xs']} resize="none"></Textarea>
-      </FormControl>
-      <FormControl>
-        <FormLabel color="#f0ebe4">Imagem de rodapé</FormLabel>
-        <Input></Input>
-      </FormControl>
-    </Box>
+    <>
+      <DecorationPost />
+
+      <PostSectionContainer>
+        <FormControl>
+          <FormLabel>Título da seção {num}</FormLabel>
+          <InputFormPostStyle name={id + '-title'} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>SubTítulo da seção {num}</FormLabel>
+          <InputFormPostStyle name={id + '-subtitle'} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Imagem do Topo</FormLabel>
+          <InputFormPostStyle name={id + 'top-image'} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Conteúdo da seção {num}</FormLabel>
+          <TextAreaFormPostStyle name={id + 'content'} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Imagem de rodapé</FormLabel>
+          <InputFormPostStyle name={id + 'botton-image'} />
+        </FormControl>
+      </PostSectionContainer>
+    </>
   )
 }
 export default PostSection

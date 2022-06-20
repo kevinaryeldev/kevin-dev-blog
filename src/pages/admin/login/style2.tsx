@@ -10,6 +10,7 @@ interface InputStyledProps {
 
 interface ButtonAdminStyle extends ChakraComponentProps {
   type?: 'button' | 'submit'
+  w?: string
 }
 
 export const ButtonAdminStyle = ({ children, ...props }: ButtonAdminStyle) => (

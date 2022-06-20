@@ -1,4 +1,4 @@
-import { chakra, Box, Button } from '@chakra-ui/react'
+import { chakra, Box } from '@chakra-ui/react'
 
 export const PageWrapper = chakra(Box, {
   baseStyle: {

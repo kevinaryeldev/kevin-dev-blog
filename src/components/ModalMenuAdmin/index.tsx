@@ -13,9 +13,7 @@ const ModalMenuAdmin = () => {
         <MenuItem>Create a Copy</MenuItem>
         <MenuItem>Mark as Draft</MenuItem>
         <MenuItem>Delete</MenuItem>
-        <MenuItem>
-          <ButtonDarkMode invert />
-        </MenuItem>
+        <ButtonDarkMode invert />
       </MenuList>
     </Menu>
   )
